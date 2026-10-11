@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#13224c">
+  <meta name="description" content="Kuiz interaktif Reka Bentuk Pembungkusan RBT Tahun 4: 20 soalan objektif, pemarkahan automatik dan semakan jawapan.">
+  <title>Kuiz RBT Tahun 4 | Reka Bentuk Pembungkusan</title>
+  <style>
+    :root {
+      --navy:#13224c; --navy2:#203770; --blue:#305beb; --aqua:#13aeb3;
+      --yellow:#ffca57; --ink:#253455; --muted:#66748f; --paper:#ffffff;
+      --background:#eef4ff; --edge:#dbe4f4; --good:#078459; --bad:#dc4869;
+      --shadow:0 16px 42px rgba(24,51,110,.12);
+    }
+    * {box-sizing:border-box}
+    html {scroll-behavior:smooth}
+    body {margin:0; min-height:100vh; background:radial-gradient(ellipse at 18% 0%,#e0ecff 0%,transparent 40%),linear-gradient(160deg,#edf5ff 0%,#f6f8ff 50%,#eff9f7 100%);color:var(--ink);font-family:ui-rounded, "Segoe UI",Arial,sans-serif;line-height:1.5}
+    button, input {font:inherit}
+    button {cursor:pointer}
+    button:focus-visible, input:focus-visible {outline:3px solid var(--aqua);outline-offset:3px}
+    [hidden] {display:none !important}
+    .wrap {width:min(1120px,calc(100% - 32px));margin:0 auto}
+    .topbar {background:var(--navy);color:#fff;position:relative;overflow:hidden}
+    .topbar::after {content:"";position:absolute;border:1px solid #ffffff30;border-radius:50%;width:290px;height:290px;right:-78px;top:-166px;pointer-events:none}
+    .topinner {min-height:85px;display:flex;align-items:center;justify-content:space-between;gap:16px;position:relative;z-index:1}
+    .brand {display:flex;align-items:center;gap:13px;font-weight:900;font-size:1.16rem;letter-spacing:.01em}
+    .brand-icon {display:grid;place-items:center;width:44px;height:44px;background:var(--yellow);border-radius:15px;font-size:25px;box-shadow:0 5px 0 #ca8f17;color:var(--navy)}
+    .top-tag {font-size:.78rem;font-weight:800;letter-spacing:.07em;background:#ffffff18;border:1px solid #ffffff30;border-radius:99px;padding:8px 13px;white-space:nowrap}
+    main {padding:30px 0 50px}
+    .card {background:var(--paper);border:1px solid #e5ebf6;border-radius:24px;box-shadow:var(--shadow)}
+    .hero {background:linear-gradient(125deg,#233d8a 0%,#3b67e3 64%,#25aeba 100%);color:#fff;padding:36px;display:flex;align-items:center;justify-content:space-between;gap:30px;min-height:235px;overflow:hidden;position:relative;border-radius:24px 24px 0 0}
+    .hero::before {content:"";position:absolute;width:330px;height:330px;border:3px dashed #ffffff2b;border-radius:50%;right:-50px;top:-60px}
+    .eyebrow {display:inline-flex;align-items:center;gap:7px;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;font-weight:900;color:#fff;background:#ffffff2a;border:1px solid #ffffff3f;padding:6px 12px;border-radius:99px}
+    h1 {font-size:clamp(1.8rem,4vw,2.9rem);line-height:1.15;margin:16px 0 9px;letter-spacing:-.035em}
+    h2 {font-size:1.34rem;margin:0 0 9px;color:var(--navy)}
+    p {margin:0}
+    .hero-sub {color:#e5ecff;max-width:540px;font-size:.98rem}
+    .hero-art {font-size:4.6rem;filter:drop-shadow(0 12px 7px #17275655);transform:rotate(-9deg);position:relative;z-index:1;flex:none}
+    .start-body {padding:32px 38px 38px}
+    .stats {display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px}
+    .pill {border-radius:99px;border:1px solid var(--edge);background:#f2f6ff;color:var(--navy2);padding:7px 13px;font-size:.83rem;font-weight:800}
+    .intro-grid {display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:start}
+    .form-panel {background:#f8faff;padding:24px;border:1px solid var(--edge);border-radius:18px}
+    label.field-label {display:block;font-weight:800;font-size:.92rem;margin:0 0 8px}
+    .field {width:100%;border:2px solid #dce5f5;background:#fff;border-radius:12px;padding:13px 15px;min-height:49px;color:var(--ink);margin-bottom:17px}
+    .field::placeholder {color:#9aa9c0}
+    .smallnote {font-size:.81rem;color:var(--muted);margin:11px 0 0}
+    .rules {background:#fffbeb;border:1px solid #ffe8a4;padding:22px 24px;border-radius:18px}
+    .rules h2 {display:flex;gap:8px;align-items:center;font-size:1.13rem}
+    .rules ul {margin:11px 0 0;padding-left:22px}
+    .rules li {margin:10px 0;font-size:.9rem}
+    .btn {display:inline-flex;justify-content:center;align-items:center;gap:9px;border:0;border-radius:13px;font-weight:900;padding:12px 20px;min-height:48px;transition:transform .12s,filter .12s;background:var(--blue);color:#fff}
+    .btn:hover:not(:disabled) {transform:translateY(-1px);filter:brightness(1.05)}
+    .btn:disabled {opacity:.45;cursor:not-allowed}
+    .btn-primary {background:var(--blue);color:#fff;box-shadow:0 5px 0 #1e3ea4}
+    .btn-green {background:var(--good);box-shadow:0 5px 0 #065b40}
+    .btn-outline {background:#fff;border:2px solid #d5e0f2;color:var(--navy);box-shadow:none}
+    .btn-quiet {background:#eef4ff;color:var(--navy);box-shadow:none}
+    .btn-wide {width:100%}
+    .section-title {color:var(--navy);font-size:1rem;font-weight:900}
+    .quiz-grid {display:grid;grid-template-columns:minmax(0,1fr) 254px;gap:21px;align-items:start}
+    .quiz-main {padding:31px}
+    .quiz-top {display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+    .question-count {font-size:.93rem;font-weight:900;color:var(--navy)}
+    .difficulty {font-size:.75rem;font-weight:900;letter-spacing:.04em;padding:6px 11px;border-radius:99px;background:#f1edff;color:#6949ae}
+    .difficulty.kbat {background:#fff1d3;color:#9b5b13}
+    .difficulty.mudah {background:#e0f8e8;color:#207b4e}
+    .progress-track {height:11px;background:#eaf0fb;border-radius:99px;overflow:hidden;margin:18px 0 9px}
+    .progress-fill {height:100%;width:0;background:linear-gradient(90deg,#2b5bef,#14adab);border-radius:99px;transition:width .3s}
+    .progress-caption {font-size:.76rem;color:var(--muted);text-align:right}
+    .question {font-size:clamp(1.2rem,2.5vw,1.65rem);line-height:1.47;font-weight:900;color:#18284d;margin:30px 0 22px}
+    .options {display:grid;gap:11px;margin-bottom:28px}
+    .answer {width:100%;display:flex;align-items:center;gap:14px;text-align:left;background:#fff;border:2px solid #dce5f3;border-radius:16px;padding:13px 16px;min-height:65px;color:var(--ink);font-weight:700;transition:background .12s,border-color .12s,transform .12s}
+    .answer:hover {background:#f5f9ff;border-color:#9cb5fd;transform:translateX(2px)}
+    .answer[aria-pressed="true"] {background:#edf4ff;border-color:var(--blue);box-shadow:0 0 0 2px #305beb25}
+    .answer-letter {display:grid;place-items:center;border-radius:11px;background:#ecf0fa;color:var(--navy);width:36px;height:36px;flex:none;font-weight:950}
+    .answer[aria-pressed="true"] .answer-letter {background:var(--blue);color:#fff}
+    .quiz-bottom {border-top:1px solid var(--edge);padding-top:22px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+    .nav-card {padding:23px;position:sticky;top:20px}
+    .palette {display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-top:17px}
+    .nav-number {aspect-ratio:1;border:1px solid #d8e1ef;border-radius:10px;background:#f4f7fc;color:var(--navy);font-size:.84rem;font-weight:900}
+    .nav-number.answered {background:#d9f3e9;color:#006946;border-color:#a0e1cb}
+    .nav-number.current {outline:3px solid #4065ee;outline-offset:1px}
+    .nav-help {display:flex;align-items:center;gap:8px;margin-top:17px;font-size:.75rem;color:var(--muted)}
+    .dot {width:10px;height:10px;display:inline-block;background:#d9f3e9;border:1px solid #91d8c4;border-radius:3px}
+    .answered-text {color:var(--good);font-weight:900}
+    .result-head {text-align:center;padding:34px 35px 22px;background:linear-gradient(125deg,#e9f5ff 0%,#e9fff6 100%);border-radius:24px 24px 0 0;border-bottom:1px solid var(--edge)}
+    .trophy {font-size:3.8rem;line-height:1}
+    .result-head h1 {color:var(--navy);font-size:clamp(1.65rem,3vw,2.3rem);margin:12px auto 7px}
+    .result-score {font-size:clamp(3.1rem,8vw,5rem);font-weight:950;line-height:1.2;color:var(--navy);letter-spacing:-.07em}
+    .result-score span {font-size:1.5rem;color:var(--muted);letter-spacing:normal}
+    .result-body {padding:31px}
+    .summary {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:21px 0 25px}
+    .metric {padding:15px;background:#f4f7ff;border:1px solid var(--edge);border-radius:14px;text-align:center}
+    .metric strong {display:block;font-size:1.7rem;color:var(--navy)}
+    .metric span {font-size:.78rem;font-weight:700;color:var(--muted)}
+    .action-row {display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+    .review {margin-top:30px;border-top:1px solid var(--edge);padding-top:25px}
+    .review-list {display:grid;gap:12px;margin-top:15px}
+    .review-item {border:1px solid var(--edge);border-radius:15px;padding:16px;background:#fdfdff}
+    .review-item.correct {border-left:5px solid var(--good)}
+    .review-item.incorrect {border-left:5px solid var(--bad)}
+    .review-item h3 {font-size:.95rem;margin:0 0 10px;color:var(--navy)}
+    .review-meta {font-size:.83rem;color:var(--muted);margin:3px 0}
+    .review-meta strong {color:var(--ink)}
+    .explain {font-size:.82rem;color:#405470;margin-top:9px;background:#f1f6ff;padding:10px 12px;border-radius:9px}
+    .feedback {font-size:.84rem;margin-top:12px;color:var(--good);min-height:1em}
+    .footer {padding:0 0 30px;text-align:center;color:#7a8aa7;font-size:.77rem}
+    .sr-only {position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    @media(max-width:850px){.quiz-grid,.intro-grid{grid-template-columns:1fr}.nav-card{position:static}.hero-art{font-size:3.3rem}.top-tag{display:none}}
+    @media(max-width:570px){.wrap{width:calc(100% - 20px)}.topinner{min-height:72px}.brand{font-size:1rem}.hero{padding:25px;min-height:210px}.hero-art{display:none}.start-body,.quiz-main,.result-body{padding:22px 17px}.form-panel,.rules{padding:18px}.quiz-bottom{align-items:stretch;flex-direction:column}.quiz-bottom .btn{width:100%}.summary{gap:6px}.metric{padding:12px 5px}.metric strong{font-size:1.3rem}.action-row .btn{width:100%}}
+    @media print {
+      @page {size:A4;margin:14mm}
+      body{background:#fff;color:#000}
+      .topbar,.footer,#startScreen,#quizScreen,.no-print,.action-row,.review-toggle {display:none!important}
+      main{padding:0}
+      .wrap{width:100%}
+      #resultScreen{display:block!important}
+      #resultScreen.card{box-shadow:none;border:none}
+      .result-head{border:1px solid #ccc;padding:10px;background:#fff}
+      .trophy{font-size:25px}
+      .result-head h1{margin:3px 0;font-size:20px}
+      .result-score{font-size:40px}
+      .result-body{padding:10px 0}
+      .summary{margin:8px 0}
+      #reviewSection{display:block!important}
+      #reviewList{display:grid!important}
+      .review{margin-top:8px;padding-top:6px}
+      .review-list{gap:5px}
+      .review-item{break-inside:avoid;padding:8px;border:1px solid #ccc;font-size:11px}
+      .review-item h3{font-size:11px;margin:0 0 3px}
+      .review-meta,.explain{font-size:10px;margin:2px 0}
+      .explain{padding:3px 4px}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar no-print">
+    <div class="wrap topinner">
+      <div class="brand"><span class="brand-icon" aria-hidden="true">📦</span><span>RBT KIDS <span style="color:#a5f6ec">•</span> TAHUN 4</span></div>
+      <span class="top-tag">UNIT 4 · PEMBUNGKUSAN</span>
+    </div>
+  </header>
+  <main class="wrap">
+    <section id="startScreen" class="card" aria-labelledby="startTitle">
+      <div class="hero">
+        <div>
+          <span class="eyebrow">✨ Kuiz Pembelajaran Interaktif</span>
+          <h1 id="startTitle">Jom Jadi Pereka<br>Pembungkusan!</h1>
+          <p class="hero-sub">Uji pengetahuan kamu tentang ciri pembungkusan, lakaran, proses pembinaan dan pengiraan kos.</p>
+        </div>
+        <div class="hero-art" aria-hidden="true">📦 ✂️</div>
+      </div>
+      <div class="start-body">
+        <div class="stats" aria-label="Butiran kuiz">
+          <span class="pill">🧩 20 soalan</span><span class="pill">🎯 20 markah</span><span class="pill">🧠 Mudah · Sederhana · KBAT</span><span class="pill">📱 Mesra telefon</span>
+        </div>
+        <div class="intro-grid">
+          <form id="studentForm" class="form-panel" autocomplete="off">
+            <h2>Maklumat Murid</h2>
+            <p class="smallnote" style="margin:0 0 19px">Isikan maklumat sebelum memulakan kuiz.</p>
+            <label class="field-label" for="studentName">Nama penuh</label>
+            <input class="field" id="studentName" name="studentName" maxlength="100" placeholder="Contoh: Nur Aisyah binti Ahmad" required>
+            <label class="field-label" for="studentClass">Kelas</label>
+            <input class="field" id="studentClass" name="studentClass" maxlength="50" placeholder="Contoh: 4 Al Farabi" required>
+            <button class="btn btn-primary btn-wide" type="submit">Mula Kuiz <span aria-hidden="true">➜</span></button>
+            <p class="smallnote">Maklumat dan jawapan kekal pada peranti ini sahaja sehingga kamu memuat turun keputusan.</p>
+          </form>
+          <div class="rules">
+            <h2><span aria-hidden="true">📘</span> Cara Bermain</h2>
+            <ul>
+              <li>Baca setiap soalan dengan teliti.</li>
+              <li>Pilih <strong>satu</strong> jawapan A, B, C atau D.</li>
+              <li>Gunakan butang <strong>Seterusnya</strong> atau nombor soalan untuk bergerak.</li>
+              <li>Tekan <strong>Hantar Jawapan</strong> selepas selesai.</li>
+              <li>Semak markah dan muat turun keputusan untuk diserahkan kepada guru.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="quizScreen" class="quiz-grid" hidden aria-label="Soalan kuiz">
+      <div class="card quiz-main">
+        <div class="quiz-top">
+          <span id="questionCount" class="question-count">Soalan 1 / 20</span>
+          <span id="difficulty" class="difficulty">Mudah</span>
+        </div>
+        <div class="progress-track" role="progressbar" aria-label="Kemajuan jawapan" aria-valuemin="0" aria-valuemax="20" aria-valuenow="0" id="progressTrack"><div class="progress-fill" id="progressFill"></div></div>
+        <p id="progressCaption" class="progress-caption" aria-live="polite">0 daripada 20 telah dijawab</p>
+        <h2 class="question" id="questionText" tabindex="-1"></h2>
+        <div class="options" id="optionList" role="group" aria-label="Pilihan jawapan"></div>
+        <div class="quiz-bottom">
+          <button class="btn btn-outline" id="prevBtn" type="button">← Sebelumnya</button>
+          <button class="btn btn-primary" id="nextBtn" type="button">Seterusnya →</button>
+          <button class="btn btn-green" id="submitBtn" type="button" hidden>Hantar Jawapan ✓</button>
+        </div>
+      </div>
+      <aside class="card nav-card" aria-label="Navigasi kuiz">
+        <div class="section-title">📋 Peta Soalan</div>
+        <p id="answeredCount" class="smallnote">0 / 20 telah dijawab</p>
+        <div id="palette" class="palette"></div>
+        <div class="nav-help"><span class="dot"></span> Hijau = telah dijawab</div>
+        <p class="smallnote">Klik nombor untuk pergi ke soalan tersebut.</p>
+      </aside>
+    </section>
+
+    <section id="resultScreen" class="card" hidden aria-labelledby="resultTitle">
+      <div class="result-head">
+        <div class="trophy" id="resultIcon" aria-hidden="true">🏆</div>
+        <h1 id="resultTitle">Tahniah, kamu telah selesai!</h1>
+        <p id="resultStudent" class="hero-sub" style="color:#405475;margin:auto"></p>
+        <div class="result-score"><output id="scoreValue">0</output> <span>/ 20 markah</span></div>
+        <p id="resultMessage"></p>
+      </div>
+      <div class="result-body">
+        <div class="summary">
+          <div class="metric"><strong id="correctCount">0</strong><span>Jawapan betul</span></div>
+          <div class="metric"><strong id="wrongCount">0</strong><span>Belum tepat</span></div>
+          <div class="metric"><strong id="percentValue">0%</strong><span>Peratus markah</span></div>
+        </div>
+        <h2>Keputusan Kuiz Kamu</h2>
+        <p>Keputusan dijana secara automatik. Kamu boleh mencetak, menyalin atau memuat turun fail CSV untuk dihantar kepada guru.</p>
+        <div class="action-row no-print">
+          <button class="btn btn-primary" id="downloadBtn" type="button">⬇ Muat Turun Keputusan</button>
+          <button class="btn btn-outline" id="copyBtn" type="button">📋 Salin Ringkasan</button>
+          <button class="btn btn-outline" id="printBtn" type="button">🖨 Cetak / Simpan PDF</button>
+          <button class="btn btn-quiet" id="resetBtn" type="button">↻ Cuba Lagi</button>
+        </div>
+        <div id="copyStatus" class="feedback no-print" role="status" aria-live="polite"></div>
+        <div id="reviewSection" class="review">
+          <div class="review-toggle no-print" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+            <h2 style="margin:0">Semakan 20 Soalan</h2>
+            <button class="btn btn-quiet" id="reviewToggle" type="button" aria-expanded="false" aria-controls="reviewList">Lihat Semakan ▼</button>
+          </div>
+          <div id="reviewList" class="review-list" hidden></div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer no-print">RBT Tahun 4 · Reka Bentuk Pembungkusan · Bahan pembelajaran digital</footer>
+
+  <script>
+  "use strict";
+  // SOALAN: Berpandukan lembaran kerja RBT Tahun 4 yang disediakan.
+  // jawapan ialah indeks pilihan betul asal (0=A, 1=B, 2=C, 3=D).
+  const BANK_SOALAN = [
+    {id:1,aras:"Sederhana",soalan:"Pembungkus makanan memaparkan nama produk, kandungan dan maklumat pemakanan. Apakah ciri pembungkusan tersebut?",pilihan:["Mesra alam","Mudah disimpan","Maklumat pelabelan","Kekal kualiti"],jawapan:2,huraian:"Nama produk, kandungan dan maklumat pemakanan disampaikan melalui maklumat pelabelan."},
+    {id:2,aras:"Sederhana",soalan:"Apakah langkah pertama ketika membina bekas makanan daripada bod lekap selepas alatan dan bahan disediakan?",pilihan:["Membuat kemasan","Mencantum bahagian","Memotong bahan","Mengukur dan menanda"],jawapan:3,huraian:"Ukur dan tanda bod lekap dahulu supaya bahagian bekas dapat dipotong dengan tepat."},
+    {id:3,aras:"KBAT",soalan:"Sebuah syarikat ingin menghantar biskut yang mudah pecah kepada pelanggan. Pembungkusan manakah paling sesuai untuk melindunginya?",pilihan:["Kotak kukuh yang mampu menahan tekanan","Beg kertas nipis tanpa lapik","Bekas terbuka tanpa penutup","Sampul lembut tanpa sokongan"],jawapan:0,huraian:"Kotak yang kukuh membantu melindungi biskut daripada tekanan dan kerosakan semasa penghantaran."},
+    {id:4,aras:"Mudah",soalan:"Antara berikut, yang manakah merupakan contoh produk makanan dalam tajuk pembungkusan?",pilihan:["Pensel warna","Nasi lemak","Buku lukisan","Pemadam"],jawapan:1,huraian:"Nasi lemak ialah produk makanan; pilihan lain ialah barang bukan makanan."},
+    {id:5,aras:"Sederhana",soalan:"Aiman membeli 3 keping bod lekap dengan harga RM0.40 sekeping. Berapakah jumlah kos bod lekap tersebut?",pilihan:["RM0.80","RM1.60","RM1.20","RM0.40"],jawapan:2,huraian:"Jumlah kos = 3 × RM0.40 = RM1.20."},
+    {id:6,aras:"KBAT",soalan:"Seorang murid mencadangkan supaya semua produk makanan dan bukan makanan menggunakan bentuk dan bahan pembungkusan yang sama. Mengapakah cadangan itu kurang sesuai?",pilihan:["Semua bahan pembungkusan mempunyai kos yang sama","Semua produk perlu mempunyai rupa yang sama","Jenis produk tidak mempengaruhi reka bentuk pembungkusan","Setiap produk mempunyai keperluan pembungkusan yang berbeza"],jawapan:3,huraian:"Jenis dan sifat produk menentukan bentuk, bahan dan fungsi pembungkusan yang sesuai."},
+    {id:7,aras:"Mudah",soalan:"Pembungkus yang diperbuat daripada bahan mudah lupus dan tidak mencemarkan alam sekitar mempunyai ciri yang bagaimana?",pilihan:["Mudah disimpan","Mesra alam","Maklumat pelabelan","Mesra pengguna"],jawapan:1,huraian:"Bahan mudah lupus yang tidak mencemarkan alam sekitar merupakan ciri mesra alam."},
+    {id:8,aras:"Sederhana",soalan:"Kos menghasilkan sebuah bekas makanan ialah bod lekap RM1.20, gam RM0.20 dan tali RM0.20. Berapakah jumlah kos keseluruhannya?",pilihan:["RM1.60","RM1.40","RM1.20","RM1.80"],jawapan:0,huraian:"RM1.20 + RM0.20 + RM0.20 = RM1.60."},
+    {id:9,aras:"Sederhana",soalan:"Selepas menilai lakaran pembungkusan, murid mendapati penggunaan satu warna sahaja menjadikan kotak kurang menarik. Apakah penambahbaikan paling sesuai?",pilihan:["Mengurangkan kemasan pada kotak","Membuang semua hiasan pada kotak","Menghilangkan maklumat pada label","Menambah corak dan warna yang menarik"],jawapan:3,huraian:"Corak dan warna yang bersesuaian boleh menjadikan pembungkusan lebih menarik."},
+    {id:10,aras:"Mudah",soalan:"Sebuah pembungkus tisu direka berbentuk ringkas supaya senang disusun di atas rak. Apakah ciri pembungkusan yang ditunjukkan?",pilihan:["Mesra alam","Mudah disimpan","Maklumat pelabelan","Kekal kualiti"],jawapan:1,huraian:"Bentuk yang memudahkan penyusunan membantu produk disimpan dengan lebih baik."},
+    {id:11,aras:"Mudah",soalan:"Apakah aktiviti yang dilakukan pada peringkat pertama projek 'Bekas Makanan Saya' dalam buku teks?",pilihan:["Menjanakan idea melalui beberapa lakaran","Mengira keuntungan jualan produk","Membuat kemasan akhir produk","Mencantum bahagian kotak"],jawapan:0,huraian:"Peringkat pertama ialah menjanakan idea reka bentuk melalui lakaran."},
+    {id:12,aras:"Sederhana",soalan:"Selepas bod lekap diukur dan ditanda mengikut lakaran, apakah proses pembinaan bekas makanan yang seterusnya?",pilihan:["Membuat kemasan","Mencantum","Memotong","Menghasilkan lakaran idea"],jawapan:2,huraian:"Selepas mengukur dan menanda, bod lekap dipotong mengikut ukuran."},
+    {id:13,aras:"Mudah",soalan:"Apakah kepentingan utama pembungkusan makanan dari aspek kebersihan?",pilihan:["Memudahkan penyusunan produk","Menambahkan pemegang pada bekas","Menjadikan tulisan label lebih kemas","Mengelakkan produk daripada tercemar"],jawapan:3,huraian:"Pembungkusan melindungi makanan daripada pencemaran yang boleh menjejaskan kebersihan."},
+    {id:14,aras:"KBAT",soalan:"Sebuah kotak makanan sukar dibawa oleh pelanggan. Penambahbaikan manakah paling berkesan untuk menjadikannya mesra pengguna?",pilihan:["Membesarkan tulisan pada label","Menambah hiasan pada permukaan kotak","Memasang tali atau pemegang yang kukuh","Menambahkan gambar makanan pada kotak"],jawapan:2,huraian:"Tali atau pemegang yang kukuh membantu pelanggan membawa kotak dengan mudah."},
+    {id:15,aras:"Sederhana",soalan:"Sebuah produk cecair hendak dibawa di dalam beg. Pembungkusan manakah paling sesuai untuk mengelakkan tumpahan?",pilihan:["Botol dengan penutup yang rapat","Kotak terbuka pada bahagian atas","Bekas kertas yang berlubang","Bekas dengan penutup yang longgar"],jawapan:0,huraian:"Botol dengan penutup rapat dapat mengurangkan risiko tumpahan."},
+    {id:16,aras:"KBAT",soalan:"Seorang murid telah menghasilkan tiga lakaran pembungkusan yang berbeza. Apakah tindakan paling sesuai sebelum memulakan pembinaan?",pilihan:["Terus membina lakaran pertama","Menilai dan memilih lakaran yang paling sesuai","Memotong semua bahan tanpa ukuran","Menghias bekas sebelum reka bentuk dipilih"],jawapan:1,huraian:"Bandingkan lakaran dahulu dan pilih reka bentuk yang paling menepati keperluan produk."},
+    {id:17,aras:"Mudah",soalan:"Antara berikut, yang manakah contoh produk bukan makanan yang ditunjukkan dalam nota?",pilihan:["Biskut","Nasi lemak","Roti","Pensel warna"],jawapan:3,huraian:"Pensel warna ialah contoh produk bukan makanan dalam nota."},
+    {id:18,aras:"KBAT",soalan:"Bekas makanan panas yang direka oleh Zara menyebabkan wap terkumpul dan makanan menjadi lembik. Apakah penambahbaikan paling sesuai pada reka bentuk bekas itu?",pilihan:["Menambah beberapa lubang pengudaraan kecil pada bahagian yang sesuai","Menutup semua ruang udara dengan gam","Menggunakan penutup tanpa sebarang bukaan","Melapik seluruh bahagian dalam dengan kertas hiasan"],jawapan:0,huraian:"Lubang pengudaraan yang sesuai membantu wap panas keluar dan mengurangkan kelembapan di dalam bekas."},
+    {id:19,aras:"Mudah",soalan:"Apakah fungsi utama gam dalam proses menghasilkan bekas makanan daripada bod lekap?",pilihan:["Mengukur panjang bahan","Mewarnakan permukaan kotak","Melekatkan bahagian yang hendak dicantum","Menentukan harga jualan"],jawapan:2,huraian:"Gam digunakan untuk melekatkan bahagian bod lekap yang hendak dicantum."},
+    {id:20,aras:"KBAT",soalan:"Sebuah kedai mahu membungkus hadiah kaca yang mudah pecah. Reka bentuk manakah paling sesuai dari segi keselamatan dan kemudahan membawa?",pilihan:["Beg kertas nipis tanpa lapik pelindung","Kotak kukuh dengan lapik pelindung dan pemegang","Kotak hiasan terbuka tanpa pelindung","Sampul kertas besar dengan tali longgar"],jawapan:1,huraian:"Kotak kukuh dengan pelapik melindungi kaca, sementara pemegang memudahkan ia dibawa."}
+  ];
+
+  const $ = id => document.getElementById(id);
+  const HURUF = ["A", "B", "C", "D"];
+  let session = [];
+  let pilihanMurid = {};
+  let indeksSemasa = 0;
+  let murid = {nama:"",kelas:""};
+  let keputusan = null;
+
+  function rawak(arr) {
+    const salinan = arr.slice();
+    for (let i=salinan.length-1;i>0;i--) {
+      const j = Math.floor(Math.random()*(i+1));
+      [salinan[i],salinan[j]] = [salinan[j],salinan[i]];
+    }
+    return salinan;
+  }
+  function kePaparan(id) {
+    ["startScreen","quizScreen","resultScreen"].forEach(k => $(k).hidden = k !== id);
+    window.scrollTo({top:0,behavior:"instant"});
+  }
+  function pilihanDariSumber(q) {
+    return rawak(q.pilihan.map((teks, asal) => ({teks,asal})));
+  }
+  function mulaKuiz(e) {
+    e.preventDefault();
+    const nama=$("studentName").value.trim();
+    const kelas=$("studentClass").value.trim();
+    if (!nama || !kelas) {$(nama ? "studentClass" : "studentName").focus(); return;}
+    murid={nama,kelas};
+    session=rawak(BANK_SOALAN).map(q=>({...q,opsyen:pilihanDariSumber(q)}));
+    pilihanMurid={}; indeksSemasa=0; keputusan=null;
+    kePaparan("quizScreen");
+    paparSoalan();
+  }
+  function bilanganDijawab() {return session.reduce((jumlah,q)=>jumlah+(pilihanMurid[q.id] !== undefined ? 1 : 0),0);}
+  function paparSoalan() {
+    const q=session[indeksSemasa];
+    $("questionCount").textContent=`Soalan ${indeksSemasa+1} / ${session.length}`;
+    $("difficulty").textContent=q.aras;
+    $("difficulty").className="difficulty " + q.aras.toLowerCase();
+    $("questionText").textContent=q.soalan;
+    const senarai=$("optionList");senarai.replaceChildren();
+    q.opsyen.forEach((ops,index)=>{
+      const butang=document.createElement("button");
+      butang.type="button";
+      butang.className="answer";
+      butang.setAttribute("aria-pressed", String(pilihanMurid[q.id]===ops.asal));
+      butang.setAttribute("aria-label",`Pilihan ${HURUF[index]}: ${ops.teks}`);
+      const huruf=document.createElement("span");huruf.className="answer-letter";huruf.textContent=HURUF[index];huruf.setAttribute("aria-hidden","true");
+      const label=document.createElement("span");label.textContent=ops.teks;
+      butang.append(huruf,label);
+      butang.addEventListener("click",()=>{pilihanMurid[q.id]=ops.asal;paparSoalan();});
+      senarai.appendChild(butang);
+    });
+    $("prevBtn").disabled=indeksSemasa===0;
+    $("nextBtn").hidden=indeksSemasa===session.length-1;
+    $("submitBtn").hidden=indeksSemasa!==session.length-1;
+    kemaskiniKemajuan();
+  }
+  function kemaskiniKemajuan() {
+    const siap=bilanganDijawab();
+    $("progressFill").style.width=`${100*siap/session.length}%`;
+    $("progressTrack").setAttribute("aria-valuenow",String(siap));
+    $("progressCaption").textContent=`${siap} daripada ${session.length} telah dijawab`;
+    $("answeredCount").textContent=`${siap} / ${session.length} telah dijawab`;
+    const palet=$("palette"); palet.replaceChildren();
+    session.forEach((q,i)=>{
+      const butang=document.createElement("button");butang.type="button";
+      butang.className="nav-number"+(pilihanMurid[q.id]!==undefined?" answered":"")+(indeksSemasa===i?" current":"");
+      butang.textContent=String(i+1);
+      butang.setAttribute("aria-label",`Pergi ke soalan ${i+1}`);
+      if(indeksSemasa===i)butang.setAttribute("aria-current","step");
+      butang.addEventListener("click",()=>{indeksSemasa=i;paparSoalan();});
+      palet.appendChild(butang);
+    });
+  }
+  function pergiKe(n) {
+    if(n<0||n>=session.length)return;
+    indeksSemasa=n;paparSoalan();
+    if(window.matchMedia("(max-width:850px)").matches)$("questionText").scrollIntoView({behavior:"smooth",block:"start"});
+  }
+  function serahKuiz() {
+    const belum=session.length-bilanganDijawab();
+    const mesej=belum>0?`Masih ada ${belum} soalan yang belum dijawab. Teruskan menghantar jawapan?`:
+       "Adakah kamu pasti mahu menghantar semua jawapan? Selepas dihantar, jawapan tidak boleh diubah.";
+    if (!window.confirm(mesej)) return;
+    keputusan=session.map((q,i)=>({
+      no:i+1,q,dijawab:pilihanMurid[q.id],
+      betul:pilihanMurid[q.id] === q.jawapan
+    }));
+    paparKeputusan();
+  }
+  function paparKeputusan() {
+    const markah=keputusan.filter(k=>k.betul).length;
+    const salah=session.length-markah;
+    const peratus=Math.round(markah/session.length*100);
+    $("scoreValue").textContent=markah;
+    $("correctCount").textContent=markah;
+    $("wrongCount").textContent=salah;
+    $("percentValue").textContent=peratus+"%";
+    $("resultStudent").textContent=`${murid.nama} • ${murid.kelas}`;
+    $("resultIcon").textContent=markah>=16?"🏆":markah>=10?"🌟":"💪";
+    $("resultMessage").textContent=markah>=16?"Hebat! Teruskan usaha cemerlang kamu!":markah>=10?"Bagus! Semak jawapan untuk lebih mahir.":"Teruskan mencuba! Ulang kaji dan cuba lagi.";
+    $("reviewToggle").setAttribute("aria-expanded","false");
+    $("reviewToggle").textContent="Lihat Semakan ▼";
+    $("reviewList").hidden=true;
+    binaSemakan();
+    kePaparan("resultScreen");
+  }
+  function labelJawapan(item,asal) {
+    if(asal===undefined)return "Tidak dijawab";
+    const n=item.q.opsyen.findIndex(x=>x.asal===asal);
+    return `${HURUF[n]}. ${item.q.pilihan[asal]}`;
+  }
+  function binaSemakan() {
+    const container=$("reviewList");container.replaceChildren();
+    keputusan.forEach(item=>{
+      const card=document.createElement("div");card.className="review-item "+(item.betul?"correct":"incorrect");
+      const title=document.createElement("h3");title.textContent=`Soalan ${item.no} — ${item.betul?"✓ Betul":"✕ Perlu ulang kaji"}: ${item.q.soalan}`;
+      const jawapan=document.createElement("p");jawapan.className="review-meta";
+      const jLabel=document.createElement("strong");jLabel.textContent="Jawapan kamu: ";jawapan.append(jLabel,document.createTextNode(labelJawapan(item,item.dijawab)));
+      const betul=document.createElement("p");betul.className="review-meta";
+      const bLabel=document.createElement("strong");bLabel.textContent="Jawapan betul: ";betul.append(bLabel,document.createTextNode(labelJawapan(item,item.q.jawapan)));
+      const huraian=document.createElement("p");huraian.className="explain";huraian.textContent=item.q.huraian;
+      card.append(title,jawapan,betul,huraian);container.appendChild(card);
+    });
+  }
+  function ringkasanKeputusan() {
+    const score=keputusan.filter(x=>x.betul).length;
+    return `KEPUTUSAN KUIZ RBT TAHUN 4 — REKA BENTUK PEMBUNGKUSAN\nNama: ${murid.nama}\nKelas: ${murid.kelas}\nMarkah: ${score} / ${session.length} (${Math.round(score/session.length*100)}%)\nTarikh: ${new Date().toLocaleDateString("ms-MY")}\nNota: Keputusan dijana pada peranti murid; serahkan kepada guru mengikut arahan.`;
+  }
+  function csvEscape(v) {return `"${String(v??"").replaceAll('"','""')}"`;}
+  function muatTurun() {
+    if(!keputusan)return;
+    const columns=["Nama","Kelas","Tarikh","Markah","Peratus","Nombor Soalan","Aras","Soalan","Jawapan Murid","Jawapan Betul","Status"];
+    const markah=keputusan.filter(x=>x.betul).length;
+    const hari=new Date().toLocaleDateString("ms-MY");
+    const lines=[columns.map(csvEscape).join(",")];
+    keputusan.forEach(item=>{
+      const row=[murid.nama,murid.kelas,hari,`${markah}/${session.length}`,`${Math.round(markah/session.length*100)}%`,item.no,item.q.aras,item.q.soalan,labelJawapan(item,item.dijawab),labelJawapan(item,item.q.jawapan),item.betul?"Betul":"Salah"];
+      lines.push(row.map(csvEscape).join(","));
+    });
+    const blob=new Blob(["\ufeff",lines.join("\r\n")],{type:"text/csv;charset=utf-8"});
+    const url=URL.createObjectURL(blob);
+    const link=document.createElement("a");link.href=url;
+    link.download=`Keputusan_RBT_${murid.nama.replace(/[^a-zA-Z0-9\- ]/g,"").trim().replace(/\s+/g,"_").slice(0,40)||"Murid"}.csv`;
+    document.body.appendChild(link);link.click();link.remove();URL.revokeObjectURL(url);
+  }
+  async function salinRingkasan() {
+    const teks=ringkasanKeputusan();
+    let berjaya=false;
+    try {if(navigator.clipboard?.writeText) {await navigator.clipboard.writeText(teks);berjaya=true;}}catch(e){}
+    if(!berjaya){
+      const ta=document.createElement("textarea");ta.value=teks;ta.style.position="fixed";ta.style.left="-9999px";
+      document.body.appendChild(ta);ta.focus();ta.select();
+      try{berjaya=document.execCommand("copy");}catch(e){}
+      ta.remove();
+    }
+    $("copyStatus").textContent=berjaya?"Ringkasan keputusan telah disalin. Tampalkan ke WhatsApp atau Google Classroom.":"Salinan automatik tidak disokong. Gunakan Muat Turun Keputusan atau Cetak / Simpan PDF.";
+  }
+  function mulaSemula() {
+    if(!window.confirm("Mulakan semula kuiz? Keputusan sesi ini akan ditutup. Pastikan sudah disimpan jika perlu."))return;
+    session=[];pilihanMurid={};murid={nama:"",kelas:""};keputusan=null;indeksSemasa=0;
+    $("studentForm").reset();$("copyStatus").textContent="";
+    kePaparan("startScreen");$("studentName").focus();
+  }
+  $("studentForm").addEventListener("submit",mulaKuiz);
+  $("prevBtn").addEventListener("click",()=>pergiKe(indeksSemasa-1));
+  $("nextBtn").addEventListener("click",()=>pergiKe(indeksSemasa+1));
+  $("submitBtn").addEventListener("click",serahKuiz);
+  $("reviewToggle").addEventListener("click",()=>{
+    const list=$("reviewList");list.hidden=!list.hidden;
+    $("reviewToggle").setAttribute("aria-expanded",String(!list.hidden));
+    $("reviewToggle").textContent=list.hidden?"Lihat Semakan ▼":"Sembunyikan Semakan ▲";
+  });
+  $("downloadBtn").addEventListener("click",muatTurun);
+  $("copyBtn").addEventListener("click",salinRingkasan);
+  $("printBtn").addEventListener("click",()=>window.print());
+  $("resetBtn").addEventListener("click",mulaSemula);
+  </script>
+</body>
+</html>
